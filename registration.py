@@ -44,6 +44,7 @@ class registration_page(ctk.CTk):
         # Adding event handlers to each entry widget
         self.name_entry.bind(sequence="<FocusOut>",command = lambda event : self.param(event,"name"))
         self.id_entry.bind(sequence="<FocusOut>",command = lambda event : self.param(event,"id"))
+        self.mail_entry.bind(sequence="<FocusOut>",command = lambda event : self.param(event,"mail"))
         self.pswd_entry.bind(sequence="<FocusOut>",command = lambda event : self.param(event,"pswd"))
         self.cpswd_entry.bind(sequence="<FocusOut>",command = lambda event : self.param(event,"cpswd"))
 
@@ -88,6 +89,28 @@ class registration_page(ctk.CTk):
                 self.id_entry['border_color'] = "#111117"
                 self.id_entry['text_color'] = "black"   
             b = True
+        elif args[0]=="mail":
+            if self.mail_entry.get().strip()!='':
+                for i in self.mail_entry.get().strip():
+                    if i not in string.ascii_letters and i not in string.digits:
+                        if i not in ['@','.','_']:
+                            b = False
+                            break
+                if '@' not in self.mail_entry.get().strip():
+                    b = False
+                if '.' not in self.mail_entry.get().strip():
+                    b = False
+                if b==False:
+                    self.mail_entry.configure(border_color = "#e60202",text_color="#e60202")
+                    self.tip_mail.msg = "Mail must contain ID and '@' symbol followed by email provider!"
+                else:
+                    self.mail_entry.configure(border_color = "#048f14",text_color="#048f14")
+                    self.tip_mail.msg = "Valid mail"
+            else:
+                self.tip_mail.msg = "Mail must contain '@' symbol, eg. abc@xyz.com"
+                self.mail_entry['border_color'] = "#111117"
+                self.mail_entry['text_color'] = "black"
+            b=True
         elif args[0]=="pswd":
             if self.pswd_entry.get().strip()!='':
                 s = set(self.pswd_entry.get().strip())
