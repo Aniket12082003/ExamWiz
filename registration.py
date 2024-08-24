@@ -1,12 +1,15 @@
 
 import customtkinter as ctk
 from tktooltip import ToolTip
+import pywinstyles as pws
 import string
 class registration_page(ctk.CTk):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
         self.geometry("500x550")
-        self.configure(fg_color = "#1c1616")
+        self._fg_color = "#1c1616"
+        self.attributes("-alpha",0.85)
+        pws.apply_style(self,style="aero")
         self.prepare()
         self.resizable(False,False)
         self.add_to_page()
@@ -15,12 +18,12 @@ class registration_page(ctk.CTk):
     # Preparing entire registration page
     def prepare(self):
         # Creating frames to put the label and entry widgets into
-        self.frame1 = ctk.CTkFrame(self,fg_color="#1c1616",height=50,bg_color="#1c1616",corner_radius=5)
-        self.frame2 = ctk.CTkFrame(self,fg_color="#1c1616",height=50,bg_color="#1c1616",corner_radius=5)
-        self.frame3 = ctk.CTkFrame(self,fg_color="#1c1616",height=50,bg_color="#1c1616",corner_radius=5)
-        self.frame4 = ctk.CTkFrame(self,fg_color="#1c1616",height=50,bg_color="#1c1616",corner_radius=5)
-        self.frame5 = ctk.CTkFrame(self,fg_color="#1c1616",height=50,bg_color="#1c1616",corner_radius=5)
-        self.frame6 = ctk.CTkFrame(self,fg_color="#1c1616",height=50,bg_color="#1c1616",corner_radius=5)
+        self.frame1 = ctk.CTkFrame(self,height=50,corner_radius=5,fg_color=None)
+        self.frame2 = ctk.CTkFrame(self,height=50,corner_radius=5,fg_color=None)
+        self.frame3 = ctk.CTkFrame(self,height=50,corner_radius=5,fg_color=None)
+        self.frame4 = ctk.CTkFrame(self,height=50,corner_radius=5,fg_color=None)
+        self.frame5 = ctk.CTkFrame(self,height=50,corner_radius=5,fg_color=None)
+        self.frame6 = ctk.CTkFrame(self,height=50,corner_radius=5,fg_color=None,width=30)
         
         # Creating Labels for all fields
         self.name = ctk.CTkLabel(self.frame1,text="Name : ",font=(("Trebuchet",15,"bold","roman")),text_color="white")
@@ -162,7 +165,7 @@ class registration_page(ctk.CTk):
         self.frame3.pack(padx = 10, pady = 20,fill = ctk.X)
         self.frame4.pack(padx = 10, pady = 20,fill = ctk.X)
         self.frame5.pack(padx = 10, pady = 20,fill = ctk.X)
-        self.frame6.pack(padx = 10, pady = 20,fill = ctk.X)
+        self.frame6.pack(padx = 10, pady = 20)
         self.name.pack(padx = 10,pady = 10,side = ctk.LEFT)
         self.name_entry.pack(padx = 50,pady = 10,side = ctk.RIGHT)
         self.roll.pack(padx = 10,pady = 10,side = ctk.LEFT)
