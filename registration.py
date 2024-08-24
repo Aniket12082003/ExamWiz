@@ -151,4 +151,4 @@ class registration_page(ctk.CTk):
         self.cpswd.pack(padx = 10,pady = 10,side = ctk.LEFT)
         self.cpswd_entry.pack(padx = 50,pady = 10,side = ctk.RIGHT)
         self.regis.pack(padx = 10,pady = 10)
-#r = registration_page()
+r = registration_page()
