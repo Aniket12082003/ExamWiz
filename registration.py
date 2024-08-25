@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from tktooltip import ToolTip
+import pywinstyles as pws
 import string
 from openpyxl import load_workbook
 import tkinter
@@ -7,11 +8,18 @@ import tkinter
 class registration_page(ctk.CTk):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
+<<<<<<< HEAD
         #self.geometry("500x550")
         x = (self.winfo_screenwidth()/2) - 250
         y = (self.winfo_screenheight()/2) - 275
         self.geometry("500x550+%d+%d" % (x,y))
         self.configure(fg_color = "#1c1616")
+=======
+        self.geometry("500x550")
+        self._fg_color = "#1c1616"
+        self.attributes("-alpha",0.85)
+        pws.apply_style(self,style="aero")
+>>>>>>> 0a5b651b973103217c87fa5070948224d7cf7521
         self.prepare()
         self.resizable(False,False)
         self.add_to_page()
@@ -20,12 +28,12 @@ class registration_page(ctk.CTk):
     # Preparing entire registration page
     def prepare(self):
         # Creating frames to put the label and entry widgets into
-        self.frame1 = ctk.CTkFrame(self,fg_color="#1c1616",height=50,bg_color="#1c1616",corner_radius=5)
-        self.frame2 = ctk.CTkFrame(self,fg_color="#1c1616",height=50,bg_color="#1c1616",corner_radius=5)
-        self.frame3 = ctk.CTkFrame(self,fg_color="#1c1616",height=50,bg_color="#1c1616",corner_radius=5)
-        self.frame4 = ctk.CTkFrame(self,fg_color="#1c1616",height=50,bg_color="#1c1616",corner_radius=5)
-        self.frame5 = ctk.CTkFrame(self,fg_color="#1c1616",height=50,bg_color="#1c1616",corner_radius=5)
-        self.frame6 = ctk.CTkFrame(self,fg_color="#1c1616",height=50,bg_color="#1c1616",corner_radius=5)
+        self.frame1 = ctk.CTkFrame(self,height=50,corner_radius=5,fg_color=None)
+        self.frame2 = ctk.CTkFrame(self,height=50,corner_radius=5,fg_color=None)
+        self.frame3 = ctk.CTkFrame(self,height=50,corner_radius=5,fg_color=None)
+        self.frame4 = ctk.CTkFrame(self,height=50,corner_radius=5,fg_color=None)
+        self.frame5 = ctk.CTkFrame(self,height=50,corner_radius=5,fg_color=None)
+        self.frame6 = ctk.CTkFrame(self,height=50,corner_radius=5,fg_color=None,width=30)
         
         # Creating Labels for all fields
         self.name = ctk.CTkLabel(self.frame1,text="Name : ",font=(("Trebuchet",15,"bold","roman")),text_color="white")
@@ -171,7 +179,7 @@ class registration_page(ctk.CTk):
         self.frame3.pack(padx = 10, pady = 20,fill = ctk.X)
         self.frame4.pack(padx = 10, pady = 20,fill = ctk.X)
         self.frame5.pack(padx = 10, pady = 20,fill = ctk.X)
-        self.frame6.pack(padx = 10, pady = 20,fill = ctk.X)
+        self.frame6.pack(padx = 10, pady = 20)
         self.name.pack(padx = 10,pady = 10,side = ctk.LEFT)
         self.name_entry.pack(padx = 50,pady = 10,side = ctk.RIGHT)
         self.roll.pack(padx = 10,pady = 10,side = ctk.LEFT)
@@ -184,6 +192,7 @@ class registration_page(ctk.CTk):
         self.cpswd_entry.pack(padx = 50,pady = 10,side = ctk.RIGHT)
         self.regis = ctk.CTkButton(self.frame6, text="Register", text_color="white", hover_color="#2bcf02", hover=True, fg_color="#0a0263", border_spacing=2, font=("Trebuchet", 15, "roman"), state=ctk.NORMAL, command=self.register_button_click)
         self.regis.pack(padx = 10,pady = 10)
+<<<<<<< HEAD
 
     def insert_values(self, id_entry, name_entry, mail_entry, pswd_entry):
         wb = load_workbook('marks.xlsx')
@@ -192,3 +201,6 @@ class registration_page(ctk.CTk):
         wb.save('marks.xlsx')
 
 #r = registration_page()
+=======
+r = registration_page()
+>>>>>>> 0a5b651b973103217c87fa5070948224d7cf7521
