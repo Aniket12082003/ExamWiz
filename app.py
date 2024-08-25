@@ -1,4 +1,4 @@
-import PIL.Image
+from PIL import Image
 import customtkinter as ctk
 from tkinter import messagebox
 import tkinter as tk
@@ -11,14 +11,9 @@ app.title("ExamWiz")
 app.wm_iconbitmap('icon.ico')
 
 # Background
-bg = PIL.Image.open("bg.jpg")
-background_image = ctk.CTkImage(bg)
-img = ctk.CTkImage(bg, size=(app._max_width, app._max_height))
-
-'''def bg_resizer(e):
-    if e.widget is app:
-        i = ctk.CTkImage(bg, size=(e.width, e.height))
-        bg_lbl.configure(text="", image=i)'''
+bg_image = ctk.CTkImage(Image.open("bg.jpg"),size=(app.winfo_screenwidth(), app.winfo_screenheight()))
+bg_image_label = ctk.CTkLabel(app, image=bg_image)
+bg_image_label.grid(row=0, column=0)
 
 # creating button class to handle all buttons
 class button():
@@ -43,10 +38,6 @@ def confirm():
     if c==1:
         app.quit()
 
-
-bg_lbl = ctk.CTkLabel(app, text="", image=background_image)
-bg_lbl.place(x=0, y=0)
-
 # Windows
 
 
@@ -58,6 +49,5 @@ button.b['Register'].configure(command = registration_page)
 button.make("Exit")
 button.b['Exit'].place(relx=0.5,rely=0.75,anchor="center")
 button.b['Exit'].configure(command = confirm)
-
 
 app.mainloop()

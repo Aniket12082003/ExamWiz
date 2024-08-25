@@ -1,11 +1,16 @@
-
 import customtkinter as ctk
 from tktooltip import ToolTip
 import string
+from openpyxl import load_workbook
+import tkinter
+
 class registration_page(ctk.CTk):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-        self.geometry("500x550")
+        #self.geometry("500x550")
+        x = (self.winfo_screenwidth()/2) - 250
+        y = (self.winfo_screenheight()/2) - 275
+        self.geometry("500x550+%d+%d" % (x,y))
         self.configure(fg_color = "#1c1616")
         self.prepare()
         self.resizable(False,False)
@@ -49,8 +54,6 @@ class registration_page(ctk.CTk):
         self.cpswd_entry.bind(sequence="<FocusOut>",command = lambda event : self.param(event,"cpswd"))
 
         # Creating Register button
-        self.regis = ctk.CTkButton(self.frame6,text="Register",text_color="white",hover_color="#2bcf02",hover=True,fg_color="#0a0263",border_spacing=2,font=(("Trebuchet",15,"roman")),state=ctk.DISABLED)
-        self.regis.bind(sequence="<Enter>",command = lambda event : self.param(event,"register"))
 
     # Event Handler function
     def param(self,event,*args):
@@ -119,6 +122,9 @@ class registration_page(ctk.CTk):
                 sp = set(['.','*','#',"!","@","&","^","?","+","-","/","%","_","=","|"])
                 if len(s.intersection(sl))==0 or len(s.intersection(sd))==0 or len(s.intersection(sp))==0:
                     b = False
+                if len(s)<6:
+                    b = False
+                    self.tip_pswd.msg = "Password should be atleast 6 characters!"
                 if b==False:
                     self.pswd_entry.configure(border_color = "#e60202",text_color = "#e60202")
                     self.tip_pswd.msg = "Password not containing atleast one of the required characters!"
@@ -136,7 +142,7 @@ class registration_page(ctk.CTk):
                 self.tip_cpswd.msg = "Password not yet entered!"
             else:
                 if self.cpswd_entry.get().strip()!='':
-                    if self.pswd_entry.get().strip()!=self.cpswd_entry.get().strip():
+                    if self.pswd_entry.get().strip()!=self.cpswd_entry.get().strip() or self.tip_pswd.msg == "Password should be atleast 6 characters!":
                         b = False
                     if b==False:
                         self.cpswd_entry.configure(border_color = "#e60202",text_color = "#e60202")
@@ -148,12 +154,15 @@ class registration_page(ctk.CTk):
                     self.tip_cpswd.msg = "Password must be the same as above"
                     self.cpswd_entry['border_color'] = "#111117"
                     self.cpswd_entry['text_color'] = "black" 
-                b = True
-        elif args[0]=="register":
-            if self.tip_name.msg=="Valid name" and self.tip_id.msg=="Valid ID" and self.tip_pswd.msg=="Valid password" and self.tip_cpswd.msg=="Password Confirmed":
-                self.regis.configure(state = ctk.NORMAL)
-            else:
-                self.regis.configure(fg_color = "#f2110a")
+                b = True        
+
+    def register_button_click(self):
+        if self.tip_name.msg=="Valid name" and self.tip_id.msg=="Valid ID" and self.tip_mail.msg=="Valid mail" and self.tip_pswd.msg=="Valid password" and self.tip_cpswd.msg=="Password confirmed":
+            self.insert_values(self.id_entry.get(), self.name_entry.get(), self.mail_entry.get(), self.pswd_entry.get())
+            self.destroy()
+        else:
+            self.regis.configure(fg_color = "#f2110a")
+
 
     # Positioning widgets on the page
     def add_to_page(self):
@@ -173,5 +182,13 @@ class registration_page(ctk.CTk):
         self.pswd_entry.pack(padx = 50,pady = 10,side = ctk.RIGHT)
         self.cpswd.pack(padx = 10,pady = 10,side = ctk.LEFT)
         self.cpswd_entry.pack(padx = 50,pady = 10,side = ctk.RIGHT)
+        self.regis = ctk.CTkButton(self.frame6, text="Register", text_color="white", hover_color="#2bcf02", hover=True, fg_color="#0a0263", border_spacing=2, font=("Trebuchet", 15, "roman"), state=ctk.NORMAL, command=self.register_button_click)
         self.regis.pack(padx = 10,pady = 10)
+
+    def insert_values(self, id_entry, name_entry, mail_entry, pswd_entry):
+        wb = load_workbook('marks.xlsx')
+        sheet = wb.active
+        sheet.append([id_entry, name_entry, mail_entry, pswd_entry])
+        wb.save('marks.xlsx')
+
 #r = registration_page()
