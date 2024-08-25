@@ -8,18 +8,16 @@ import tkinter
 class registration_page(ctk.CTk):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-<<<<<<< HEAD
         #self.geometry("500x550")
         x = (self.winfo_screenwidth()/2) - 250
         y = (self.winfo_screenheight()/2) - 275
         self.geometry("500x550+%d+%d" % (x,y))
         self.configure(fg_color = "#1c1616")
-=======
+
         self.geometry("500x550")
         self._fg_color = "#1c1616"
         self.attributes("-alpha",0.85)
         pws.apply_style(self,style="aero")
->>>>>>> 0a5b651b973103217c87fa5070948224d7cf7521
         self.prepare()
         self.resizable(False,False)
         self.add_to_page()
@@ -192,7 +190,6 @@ class registration_page(ctk.CTk):
         self.cpswd_entry.pack(padx = 50,pady = 10,side = ctk.RIGHT)
         self.regis = ctk.CTkButton(self.frame6, text="Register", text_color="white", hover_color="#2bcf02", hover=True, fg_color="#0a0263", border_spacing=2, font=("Trebuchet", 15, "roman"), state=ctk.NORMAL, command=self.register_button_click)
         self.regis.pack(padx = 10,pady = 10)
-<<<<<<< HEAD
 
     def insert_values(self, id_entry, name_entry, mail_entry, pswd_entry):
         wb = load_workbook('marks.xlsx')
@@ -201,6 +198,3 @@ class registration_page(ctk.CTk):
         wb.save('marks.xlsx')
 
 #r = registration_page()
-=======
-r = registration_page()
->>>>>>> 0a5b651b973103217c87fa5070948224d7cf7521
