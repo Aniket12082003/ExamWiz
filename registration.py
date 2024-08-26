@@ -192,9 +192,9 @@ class registration_page(ctk.CTk):
         self.regis.pack(padx = 10,pady = 10)
 
     def insert_values(self, id_entry, name_entry, mail_entry, pswd_entry):
-        wb = load_workbook('marks.xlsx')
+        wb = load_workbook('details.xlsx')
         sheet = wb.active
         sheet.append([id_entry, name_entry, mail_entry, pswd_entry])
-        wb.save('marks.xlsx')
+        wb.save('details.xlsx')
 
 #r = registration_page()

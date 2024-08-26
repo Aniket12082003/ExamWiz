@@ -36,8 +36,7 @@ class login(ctk.CTk):
         self.id = ctk.CTkLabel(self.frame1,text="Institution ID: ",text_color="white",font=(("Trebuchet",15,"bold","roman")))
         self.mail = ctk.CTkLabel(self.frame2,text="E-mail : ",text_color="white",font=(("Trebuchet",15,"bold","roman")))
         self.pswd = ctk.CTkLabel(self.frame3,text="Password : ",text_color="white",font=(("Trebuchet",15,"bold","roman")))
-        self.log = ctk.CTkButton(self.frame4,text="Login",text_color="white",border_width=2,corner_radius=4,
-                                 font=(("Trebuchet",15,"bold","roman")),hover=True)
+        self.log = ctk.CTkButton(self.frame4,text="Login",text_color="white",border_width=2,corner_radius=4,font=(("Trebuchet",15,"bold","roman")),hover=True)
         pywinstyles.set_opacity(self.log,color="#240273",value=1)
         
 
